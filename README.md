@@ -33,7 +33,7 @@ The notes are stored in local storage.
 
 
 You can take up any of the existing issues or create a new one to contribute!<br/> 
-Contribution period ends: 22 December 2022
+Contribution period ends: 28 January 2024
 
 
 ## How to get started?
