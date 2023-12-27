@@ -13,7 +13,9 @@ The notes are stored in local storage.
 * CSS
 * Bootstrap
 * JavaScript
-
+<p align="left">
+  <img src= "notes app.jpg" alt="15" width="350"/>
+</p>
 
 ## Some screenshots
 
