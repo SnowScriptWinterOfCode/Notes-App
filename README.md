@@ -2,7 +2,7 @@
 # NOTES APP
 
 <p align="center">
-  <img src= "https://user-images.githubusercontent.com/79600026/200431586-35d02c04-3c47-4fb7-9205-1b79256740d8.jpg" alt="15" width="350"/>
+  <img src= "notes-app.png" alt="15" width="350"/>
 </p>
 
 This is a notes app, where you can create and delete notes and also search for notes. 
