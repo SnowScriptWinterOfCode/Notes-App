@@ -35,9 +35,6 @@ body {
   color: var(--font-color);
   background: #2196f3;
   padding: 10px 20px;
-  /* border: 0; */
-
-
 }
 
 .logo {
@@ -123,4 +120,7 @@ input:checked+.slider:before {
   font-size: 40px;
   margin-right: 20px;
   cursor: pointer;
+}
+.toast-body span{
+  color: var(--font-color);
 }
