@@ -78,7 +78,9 @@
                 </h5>
                 <div class="form-group">
                     <textarea class="form-control" id="heading" rows="1" placeholder="Title"></textarea> <br>
-                    <textarea class="form-control" id="addTxt" rows="3" placeholder="Note"></textarea>
+                    <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 
+                    onkeydown="if(event.keyCode==13){document.getElementById('addBtn').click(); return false;}"
+                    ></textarea>
                 </div>
                 <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
                 <button class="btn btn-primary" id="editBtn" style="margin-top: 7px;">DONE</button>
