@@ -5,8 +5,9 @@ let done = document.getElementById("editBtn");
 let addtext = document.getElementById("addTxt");
 let searchTxt = document.getElementById("searchTxt");
 let heading = document.getElementById("heading");
-let volumeButton = document.getElementById('mute-button');
-done.style.visibility="hidden";
+let volumeButton = document.getElementById("mute-button");
+let styledMessageContainer = document.getElementById("styled-message-container");
+done.style.visibility = "hidden";
 //Event listeners
 addbtn.addEventListener("click", addaNote);
 searchTxt.addEventListener("input", searchtext);
@@ -22,7 +23,7 @@ function showNotes() {
   }
   let html = "";
   notesArray.forEach(function (element, index) {
-    console.log
+    console.log;
     html += `
             <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
                     <div class="card-body">
@@ -45,9 +46,7 @@ function showNotes() {
 
 function addaNote() {
   const audio = document.querySelector(".sound");
-  if (volumeButton.classList.contains('fa-volume-up')) {
-    audio.play();
-  }
+
   let notes = localStorage.getItem("notes");
   if (notes == null) {
     notesArray = [];
@@ -62,6 +61,10 @@ function addaNote() {
       localStorage.setItem("notes", JSON.stringify(notesArray));
       addtext.value = "";
       heading.value = "";
+      $(".toast").toast("show");
+    if (volumeButton.classList.contains('fa-volume-up')) {
+      audio.play();
+    }
      }
      else if(heading.value === "" && !useDefaultTitle){
        alert("Title cannot be empty.Please Click the checkbox for Default title or Enter the Title.");
@@ -72,15 +75,22 @@ function addaNote() {
        localStorage.setItem("notes", JSON.stringify(notesArray));
        addtext.value = "";
        heading.value = "";
+       $(".toast").toast("show");
+    if (volumeButton.classList.contains('fa-volume-up')) {
+      audio.play();
+    }
      } 
- 
-   } else {
-    alert("Notes cannot be empty");
+    
+  } else {
+      styledMessageContainer.innerHTML =
+        '<div class="alert alert-warning" role="alert">Notes cannot be empty!</div>';
+      setTimeout(() => {
+        styledMessageContainer.innerHTML = "";
+      }
+      , 2000);
+     
   }
   showNotes();
-
-  // displaying toast message
-  $(".toast").toast("show");
 }
 // Function to get default title from the first two words of text
 function getDefaultTitle(text) {
@@ -88,37 +98,43 @@ function getDefaultTitle(text) {
   return words.length >= 2 ? `${words[0]} ${words[1]}` : text;
 }
 
-function editNote(index){
-            addbtn.style.visibility="collapse";
-            done.style.visibility="visible";
-            let notes = localStorage.getItem("notes");
-            if (notes == null) {
-              notesObj = [];
-            } else {
-              notesObj = JSON.parse(notes);
-            }
-            heading.value=notesObj[index][0];
-            addtext.value=notesObj[index][1];
-            done.onclick=()=>{
-              const update=[heading.value,addtext.value];
-              if(update.length>0){
-              notesObj.splice(index,1,update);
-              localStorage.setItem("notes", JSON.stringify(notesObj));
-              showNotes();
-              heading.value="";
-              addtext.value="";
-              addbtn.style.visibility="visible";
-              done.style.visibility="hidden";
-              
-              
-          }
-              else{
-                   window.alert("Can not be empty,Your item will get delted.");
-                   notesObj.splice(index,1);
-                   localStorage.setItem("notes", JSON.stringify(notesObj));
-                   showNotes();
-              }
-           }
+function editNote(index) {
+  addbtn.style.visibility = "collapse";
+  done.style.visibility = "visible";
+  let notes = localStorage.getItem("notes");
+  if (notes == null) {
+    notesObj = [];
+  } else {
+    notesObj = JSON.parse(notes);
+  }
+  heading.value = notesObj[index][0].replace(/ \(Edited\) .*/, '');
+  addtext.value = notesObj[index][1];
+  let d = new Date();
+  let n = d.toLocaleTimeString();
+
+  done.onclick = () => {
+
+    const update = [heading.value + " (Edited) " + " " + n, addtext.value];
+    console.log(update);
+
+    
+    if (update.length > 0) {
+      notesObj.splice(index, 1, update);
+
+      localStorage.setItem("notes", JSON.stringify(notesObj));
+      showNotes();
+      heading.value = "";
+      addtext.value = "";
+
+      addbtn.style.visibility = "visible";
+      done.style.visibility = "hidden";
+    } else {
+      window.alert("Can not be empty,Your item will get delted.");
+      notesObj.splice(index, 1);
+      localStorage.setItem("notes", JSON.stringify(notesObj));
+      showNotes();
+    }
+  };
 }
 
 function deleteNote(index) {
@@ -177,12 +193,11 @@ function toggleTheme() {
 })();
 
 function toggleMute() {
-  if (volumeButton.classList.contains('fa-volume-mute')) {
-    volumeButton.classList.remove('fa-volume-mute');
-    volumeButton.classList.add('fa-volume-up');
-  }
-  else {
-    volumeButton.classList.remove('fa-volume-up');
-    volumeButton.classList.add('fa-volume-mute');
+  if (volumeButton.classList.contains("fa-volume-mute")) {
+    volumeButton.classList.remove("fa-volume-mute");
+    volumeButton.classList.add("fa-volume-up");
+  } else {
+    volumeButton.classList.remove("fa-volume-up");
+    volumeButton.classList.add("fa-volume-mute");
   }
 }
