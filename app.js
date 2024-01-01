@@ -6,6 +6,7 @@ let addtext = document.getElementById("addTxt");
 let searchTxt = document.getElementById("searchTxt");
 let heading = document.getElementById("heading");
 let volumeButton = document.getElementById("mute-button");
+let styledMessageContainer = document.getElementById("styled-message-container");
 done.style.visibility = "hidden";
 //Event listeners
 addbtn.addEventListener("click", addaNote);
@@ -45,9 +46,7 @@ function showNotes() {
 
 function addaNote() {
   const audio = document.querySelector(".sound");
-  if (volumeButton.classList.contains("fa-volume-up")) {
-    audio.play();
-  }
+
   let notes = localStorage.getItem("notes");
   if (notes == null) {
     notesArray = [];
@@ -60,8 +59,17 @@ function addaNote() {
     addtext.value = "";
     heading.value = "";
     $(".toast").toast("show");
+    if (volumeButton.classList.contains('fa-volume-up')) {
+      audio.play();
+    }
   } else {
-    alert("Notes cannot be empty");
+      styledMessageContainer.innerHTML =
+        '<div class="alert alert-warning" role="alert">Notes cannot be empty!</div>';
+      setTimeout(() => {
+        styledMessageContainer.innerHTML = "";
+      }
+      , 2000);
+      
   }
   showNotes();
 }
