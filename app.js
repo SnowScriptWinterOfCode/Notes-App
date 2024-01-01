@@ -6,6 +6,7 @@ let addtext = document.getElementById("addTxt");
 let searchTxt = document.getElementById("searchTxt");
 let heading = document.getElementById("heading");
 let volumeButton = document.getElementById("mute-button");
+let volumeButton = document.getElementById("mute-button");
 let styledMessageContainer = document.getElementById("styled-message-container");
 done.style.visibility = "hidden";
 //Event listeners
@@ -57,7 +58,8 @@ function addaNote() {
     notesArray.push([heading.value, addtext.value]);
     localStorage.setItem("notes", JSON.stringify(notesArray));
     addtext.value = "";
-    heading.value="";  
+    heading.value = "";
+    $(".toast").toast("show");
     if (volumeButton.classList.contains('fa-volume-up')) {
       audio.play();
     }
@@ -71,9 +73,6 @@ function addaNote() {
       
   }
   showNotes();
-
-  // displaying toast message
-  $(".toast").toast("show");
 }
 
 function editNote(index) {
