@@ -3,7 +3,10 @@
 ![image](https://github.com/nisha-laur/Notes-App/assets/97171261/070e0914-8c2c-4fcf-9649-af5d05aabafc)
 
 ## Maintainers
-@i-am-SnehaChauhan and @Nitya-Pasrija 
+[@i-am-SnehaChauhan](https://github.com/i-am-SnehaChauhan) and [@Nitya-Pasrija](https://github.com/Nitya-Pasrija)
+
+## Reviewers
+[@nisha-laur](https://github.com/nisha-laur) 
 
 Please reach out to the maintainers if you get stuck or wish to report someone.
 
