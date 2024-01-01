@@ -83,16 +83,25 @@ function editNote(index) {
   } else {
     notesObj = JSON.parse(notes);
   }
-  heading.value = notesObj[index][0];
+  heading.value = notesObj[index][0].replace(/ \(Edited\) .*/, '');
   addtext.value = notesObj[index][1];
+  let d = new Date();
+  let n = d.toLocaleTimeString();
+
   done.onclick = () => {
-    const update = [heading.value, addtext.value];
+
+    const update = [heading.value + " (Edited) " + " " + n, addtext.value];
+    console.log(update);
+
+    
     if (update.length > 0) {
       notesObj.splice(index, 1, update);
+
       localStorage.setItem("notes", JSON.stringify(notesObj));
       showNotes();
       heading.value = "";
       addtext.value = "";
+
       addbtn.style.visibility = "visible";
       done.style.visibility = "hidden";
     } else {
