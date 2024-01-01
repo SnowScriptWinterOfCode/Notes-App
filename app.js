@@ -53,15 +53,34 @@ function addaNote() {
   } else {
     notesArray = JSON.parse(notes);
   }
+  let useDefaultTitle = document.getElementById("useDefaultTitle").checked;
   if (addtext.value !== "") {
-    notesArray.push([heading.value, addtext.value]);
-    localStorage.setItem("notes", JSON.stringify(notesArray));
-    addtext.value = "";
-    heading.value = "";
-    $(".toast").toast("show");
+    if (heading.value === "" && useDefaultTitle){
+      let title = getDefaultTitle(addtext.value);
+      notesArray.push([title, addtext.value]);
+      localStorage.setItem("notes", JSON.stringify(notesArray));
+      addtext.value = "";
+      heading.value = "";
+      $(".toast").toast("show");
     if (volumeButton.classList.contains('fa-volume-up')) {
       audio.play();
     }
+     }
+     else if(heading.value === "" && !useDefaultTitle){
+       alert("Title cannot be empty.Please Click the checkbox for Default title or Enter the Title.");
+     }
+     else {
+       let title = heading.value;
+       notesArray.push([title, addtext.value]);
+       localStorage.setItem("notes", JSON.stringify(notesArray));
+       addtext.value = "";
+       heading.value = "";
+       $(".toast").toast("show");
+    if (volumeButton.classList.contains('fa-volume-up')) {
+      audio.play();
+    }
+     } 
+    
   } else {
       styledMessageContainer.innerHTML =
         '<div class="alert alert-warning" role="alert">Notes cannot be empty!</div>';
@@ -69,9 +88,14 @@ function addaNote() {
         styledMessageContainer.innerHTML = "";
       }
       , 2000);
-      
+     
   }
   showNotes();
+}
+// Function to get default title from the first two words of text
+function getDefaultTitle(text) {
+  let words = text.split(" ");
+  return words.length >= 2 ? `${words[0]} ${words[1]}` : text;
 }
 
 function editNote(index) {
