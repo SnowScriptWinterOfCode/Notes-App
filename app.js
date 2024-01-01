@@ -6,7 +6,6 @@ let addtext = document.getElementById("addTxt");
 let searchTxt = document.getElementById("searchTxt");
 let heading = document.getElementById("heading");
 let volumeButton = document.getElementById("mute-button");
-let volumeButton = document.getElementById("mute-button");
 let styledMessageContainer = document.getElementById("styled-message-container");
 done.style.visibility = "hidden";
 //Event listeners
