@@ -119,3 +119,15 @@ body {
     margin-right: 20px;
     cursor: pointer;
   }
+  .noteContainer{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2px;
+  }
+  .noteCard{
+    min-width: 11rem !important;
+    height:fit-content;
+    max-width: fit-content !important;
+    flex:0 100%;
+  }
+  
