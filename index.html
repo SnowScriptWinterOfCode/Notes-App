@@ -79,9 +79,12 @@
                 </h5>
                 <div class="form-group">
                     <textarea class="form-control" id="heading" rows="1" placeholder="Title"></textarea> <br>
+                    <!-- Adding checkbox in  HTML -->
+                    <input type="checkbox" id="useDefaultTitle"> Use Default Title <br>
                     <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 
                     onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addBtn').click(); return false;}"
                     ></textarea>
+
                 </div>
                 <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
                 <button class="btn btn-primary" id="editBtn" style="margin-top: 7px;">DONE</button>
