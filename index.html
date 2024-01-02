@@ -71,6 +71,7 @@
 
     <div class="container my-3">
         <h1 style="color: rgb(134, 153, 237);">Welcome To Notes</h1>
+        <div id="styled-message-container"></div>
         <div class="card">
             <div class="card-body" style="background: var(--color-secondary);">
                 <h5 class="card-title" style="color: rgb(134, 153, 237);">Add a note
@@ -80,7 +81,10 @@
                     <textarea class="form-control" id="heading" rows="1" placeholder="Title"></textarea> <br>
                     <!-- Adding checkbox in  HTML -->
                     <input type="checkbox" id="useDefaultTitle"> Use Default Title <br>
-                    <textarea class="form-control" id="addTxt" rows="3" placeholder="Note"></textarea>
+                    <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 
+                    onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addBtn').click(); return false;}"
+                    ></textarea>
+
                 </div>
                 <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
                 <button class="btn btn-primary" id="editBtn" style="margin-top: 7px;">DONE</button>

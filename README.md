@@ -14,6 +14,20 @@ Please reach out to the maintainers if you get stuck or wish to report someone.
 This is a notes app, where you can create and delete notes and also search for notes. 
 The notes are stored in local storage. 
 
+## Notes App Images
+### Light Mode
+![image](https://github.com/SnowScriptWinterOfCode/Notes-App/assets/108251751/dc7bfb8b-019d-4f8c-9eca-0f7d386a55ea)
+
+### Dark Mode 
+![image](https://github.com/SnowScriptWinterOfCode/Notes-App/assets/108251751/19fc723c-a9eb-49c7-9df6-b0de2261ecd4)
+
+### Displaying Saved Notes
+![image](https://github.com/SnowScriptWinterOfCode/Notes-App/assets/108251751/3b9c9a42-6df3-47eb-b2f1-d52468fafd44)
+
+### Editing Saved Notes 
+![image](https://github.com/SnowScriptWinterOfCode/Notes-App/assets/108251751/d11021e7-3735-463f-975e-90ab23e74f0b)
+
+
 ## Tech stack used
 * HTML
 * CSS
