@@ -68,9 +68,12 @@
                 </h5>
                 <div class="form-group">
                     <textarea class="form-control" id="heading" rows="1" placeholder="Title"></textarea> <br>
+                    <!-- Adding checkbox in  HTML -->
+                    <input type="checkbox" id="useDefaultTitle"> Use Default Title <br>
                     <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 
                     onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addBtn').click(); return false;}"
                     ></textarea>
+
                 </div>
                 <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
                 <button class="btn btn-primary" id="editBtn" style="margin-top: 7px;">DONE</button>
@@ -83,11 +86,9 @@
 
 
 <!-- *** Toast Message *** -->
-  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px ">
-    <div class="toast-body">
+  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px;color: var(--font-color);  ">
       <img src="images/check-mark.png" class="rounded mr-2" width="23px">
-      Note Created Successfully!
-    </div>
+      <span>Note Created Successfully!</span>
   </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
