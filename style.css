@@ -9,7 +9,7 @@ body {
 
 .fade {
   transition-duration: 1s;
-  background: var(--color-secondary);
+  /* background: var(--color-secondary); */
 }
 
 
