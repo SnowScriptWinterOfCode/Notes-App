@@ -72,6 +72,8 @@
 
     <div class="container my-3">
         <h1 style="color: rgb(134, 153, 237); margin-top:1.5rem; margin-left: 1.5rem; margin-right: 1.5 rem;">Welcome To Notes</h1>
+        <h1 style="color: rgb(134, 153, 237);">Welcome To Notes</h1>
+        <div id="styled-message-container"></div>
         <div class="card">
             <div class="card-body" style="background: var(--color-secondary);">
                 <h5 class="card-title" style="color: rgb(134, 153, 237);">Add a note
@@ -79,7 +81,12 @@
                 </h5>
                 <div class="form-group">
                     <textarea class="form-control" id="heading" rows="1" placeholder="Title"></textarea> <br>
-                    <textarea class="form-control" id="addTxt" rows="3" placeholder="Note"></textarea>
+                    <!-- Adding checkbox in  HTML -->
+                    <input type="checkbox" id="useDefaultTitle"> Use Default Title <br>
+                    <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 
+                    onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addBtn').click(); return false;}"
+                    ></textarea>
+
                 </div>
                 <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
                 <button class="btn btn-primary" id="editBtn" style="margin-top: 7px;">DONE</button>
@@ -92,11 +99,9 @@
 
 
 <!-- *** Toast Message *** -->
-  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px ">
-    <div class="toast-body">
+  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px;color: var(--font-color);  ">
       <img src="images/check-mark.png" class="rounded mr-2" width="23px">
-      Note Created Successfully!
-    </div>
+      <span>Note Created Successfully!</span>
   </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
