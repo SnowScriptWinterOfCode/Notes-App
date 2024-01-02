@@ -8,22 +8,36 @@
     <script src='https://kit.fontawesome.com/49a2f38d1d.js' crossorigin='anonymous'></script>
     <title>Notes app</title>
 
-    <link rel = "icon" href = "notes-1.png" type = "image/x-icon">
+    <link rel="icon" href="notes-1.png" type="image/x-icon">
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-        body{background: var(--color-secondary)}
-
-        .toast{
-            color: white;
-            background: var(--color-secondary); 
+        body {
+            background: var(--color-secondary)
         }
+
+        .toast {
+            color: white;
+            background: var(--color-secondary);
+        }
+
         .fade {
             transition-duration: 1s;
         }
     </style>
+
+    <script defer src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script defer src="app.js"></script>
 </head>
 
 <body>
@@ -33,7 +47,7 @@
 
 
         <img class="logo" src="notes-1.png" alt="">
-        
+
         <a class="navbar-brand" href="#">Notes</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -79,9 +93,8 @@
                 </h5>
                 <div class="form-group">
                     <textarea class="form-control" id="heading" rows="1" placeholder="Title"></textarea> <br>
-                    <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 
-                    onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addBtn').click(); return false;}"
-                    ></textarea>
+                    <textarea class="form-control" id="addTxt" rows="3" placeholder="Note"
+                        onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addBtn').click(); return false;}"></textarea>
                 </div>
                 <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
                 <button class="btn btn-primary" id="editBtn" style="margin-top: 7px;">DONE</button>
@@ -90,27 +103,17 @@
         <h3 style="color: rgb(134, 153, 237); margin-top: 8px;">Your Notes</h3>
         <div id="notes" class="row container-fluid"> </div>
     </div>
-</div>
-
-
-<!-- *** Toast Message *** -->
-  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px ">
-    <div class="toast-body">
-      <img src="images/check-mark.png" class="rounded mr-2" width="23px">
-      Note Created Successfully!
     </div>
-  </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-<script src="app.js"></script>
+
+    <!-- *** Toast Message *** -->
+    <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true"
+        data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px ">
+        <div class="toast-body">
+            <img src="images/check-mark.png" class="rounded mr-2" width="23px">
+            Note Created Successfully!
+        </div>
+    </div>
 
 </body>
 
