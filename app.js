@@ -69,7 +69,7 @@ function addaNote() {
      }
      else if(heading.value === "" && !useDefaultTitle){
       styledTitle.innerHTML =
-        '<div class="alert alert-warning" role="alert">Title cannot be empty! Please enter a title or check the below box for default title</div>';
+        '<div class="alert alert-warning" role="alert" style="background: #b5f2fb;">Title cannot be empty! Please enter a title or check the below box for default title</div>';
       setTimeout(() => {
         styledTitle.innerHTML = "";
       }
