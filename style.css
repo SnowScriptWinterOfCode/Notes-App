@@ -121,6 +121,3 @@ input:checked+.slider:before {
   margin-right: 20px;
   cursor: pointer;
 }
-.toast-body span{
-  color: var(--font-color);
-}
