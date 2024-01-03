@@ -1,12 +1,12 @@
 //DOM selectors
 showNotes();
-let addbtn = document.getElementById("addBtn");
-let done = document.getElementById("editBtn");
-let addtext = document.getElementById("addTxt");
-let searchTxt = document.getElementById("searchTxt");
-let heading = document.getElementById("heading");
-let volumeButton = document.getElementById("mute-button");
-let styledMessageContainer = document.getElementById("styled-message-container");
+const addbtn = document.getElementById("addBtn");
+const done = document.getElementById("editBtn");
+const addtext = document.getElementById("addTxt");
+const searchTxt = document.getElementById("searchTxt");
+const heading = document.getElementById("heading");
+const volumeButton = document.getElementById("mute-button");
+const styledMessageContainer = document.getElementById("styled-message-container");
 let styledTitle = document.getElementById("styled-title");
 done.style.visibility = "hidden";
 //Event listeners
@@ -16,7 +16,7 @@ searchTxt.addEventListener("input", searchtext);
 //Functions
 // let notesArray=[]
 function showNotes() {
-  let notes = localStorage.getItem("notes");
+  const notes = localStorage.getItem("notes");
   if (notes == null) {
     notesArray = [];
   } else {
@@ -24,7 +24,6 @@ function showNotes() {
   }
   let html = "";
   notesArray.forEach(function (element, index) {
-    console.log;
     html += `
             <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
                     <div class="card-body">
@@ -48,7 +47,7 @@ function showNotes() {
 function addaNote() {
   const audio = document.querySelector(".sound");
 
-  let notes = localStorage.getItem("notes");
+  const notes = localStorage.getItem("notes");
   if (notes == null) {
     notesArray = [];
   } else {
@@ -107,7 +106,7 @@ function getDefaultTitle(text) {
 function editNote(index) {
   addbtn.style.visibility = "collapse";
   done.style.visibility = "visible";
-  let notes = localStorage.getItem("notes");
+  const notes = localStorage.getItem("notes");
   if (notes == null) {
     notesObj = [];
   } else {
@@ -146,7 +145,7 @@ function editNote(index) {
 function deleteNote(index) {
   //   console.log("I am deleting", index);
 
-  let notes = localStorage.getItem("notes");
+  const notes = localStorage.getItem("notes");
   if (notes == null) {
     notesObj = [];
   } else {
