@@ -50,7 +50,7 @@ function showNotes(searchTerm="") {
   if (filteredNotes.length !== 0) {
     notesElm.innerHTML = html;
   } else {
-    notesElm.innerHTML = `No matching notes found.`;
+    notesElm.innerHTML = `No matching notes found. Use "Add a Note" section to add notes.`;
   }
 
   notesElm.style.color = "rgb(115, 115, 115)";
