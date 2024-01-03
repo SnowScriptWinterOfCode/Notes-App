@@ -3,17 +3,15 @@ showNotes();
 const addbtn = document.getElementById("addBtn");
 const done = document.getElementById("editBtn");
 const addtext = document.getElementById("addTxt");
-const searchTxt = document.getElementById("searchTxt");
 const heading = document.getElementById("heading");
 const volumeButton = document.getElementById("mute-button");
 const styledMessageContainer = document.getElementById("styled-message-container");
+
 done.style.visibility = "hidden";
-//Event listeners
 addbtn.addEventListener("click", addaNote);
-searchTxt.addEventListener("input", searchtext);
 
 //Functions
-// let notesArray=[]
+
 function showNotes() {
   const notes = localStorage.getItem("notes");
   if (notes == null) {
@@ -54,44 +52,44 @@ function addaNote() {
   }
   let useDefaultTitle = document.getElementById("useDefaultTitle").checked;
   if (addtext.value !== "") {
-    if (heading.value === "" && useDefaultTitle){
+    if (heading.value === "" && useDefaultTitle) {
       let title = getDefaultTitle(addtext.value);
       notesArray.push([title, addtext.value]);
       localStorage.setItem("notes", JSON.stringify(notesArray));
       addtext.value = "";
       heading.value = "";
       $(".toast").toast("show");
-    if (volumeButton.classList.contains('fa-volume-up')) {
-      audio.play();
-    }
-     }
-     else if(heading.value === "" && !useDefaultTitle){
-       alert("Title cannot be empty.Please Click the checkbox for Default title or Enter the Title.");
-     }
-     else {
-       let title = heading.value;
-       notesArray.push([title, addtext.value]);
-       localStorage.setItem("notes", JSON.stringify(notesArray));
-       addtext.value = "";
-       heading.value = "";
-       $(".toast").toast("show");
-    if (volumeButton.classList.contains('fa-volume-up')) {
-      audio.play();
-    }
-     } 
-    
-  } else {
-      styledMessageContainer.innerHTML =
-        '<div class="alert alert-warning" role="alert">Notes cannot be empty!</div>';
-      setTimeout(() => {
-        styledMessageContainer.innerHTML = "";
+      if (volumeButton.classList.contains('fa-volume-up')) {
+        audio.play();
       }
+    }
+    else if (heading.value === "" && !useDefaultTitle) {
+      alert("Title cannot be empty.Please Click the checkbox for Default title or Enter the Title.");
+    }
+    else {
+      let title = heading.value;
+      notesArray.push([title, addtext.value]);
+      localStorage.setItem("notes", JSON.stringify(notesArray));
+      addtext.value = "";
+      heading.value = "";
+      $(".toast").toast("show");
+      if (volumeButton.classList.contains('fa-volume-up')) {
+        audio.play();
+      }
+    }
+
+  } else {
+    styledMessageContainer.innerHTML =
+      '<div class="alert alert-warning" role="alert">Notes cannot be empty!</div>';
+    setTimeout(() => {
+      styledMessageContainer.innerHTML = "";
+    }
       , 2000);
-     
+
   }
   showNotes();
 }
-// Function to get default title from the first two words of text
+
 function getDefaultTitle(text) {
   let words = text.split(" ");
   return words.length >= 2 ? `${words[0]} ${words[1]}` : text;
@@ -116,7 +114,7 @@ function editNote(index) {
     const update = [heading.value + " (Edited) " + " " + n, addtext.value];
     console.log(update);
 
-    
+
     if (update.length > 0) {
       notesObj.splice(index, 1, update);
 
@@ -137,8 +135,6 @@ function editNote(index) {
 }
 
 function deleteNote(index) {
-  //   console.log("I am deleting", index);
-
   const notes = localStorage.getItem("notes");
   if (notes == null) {
     notesObj = [];
@@ -150,20 +146,20 @@ function deleteNote(index) {
   localStorage.setItem("notes", JSON.stringify(notesObj));
   showNotes();
 }
-function searchtext() {
-  let inputVal = searchTxt.value;
-  let noteCards = document.getElementsByClassName("noteCard");
-  Array.from(noteCards).forEach(function (element) {
-    let cardTxt = element.getElementsByTagName("p")[0].innerText;
-    if (cardTxt.includes(inputVal)) {
-      element.style.display = "block";
-    } else {
-      element.style.display = "none";
-    }
-  });
-}
 
-// theme change function
+//search text function
+// function searchtext() {
+//   let inputVal = searchTxt.value;
+//   let noteCards = document.getElementsByClassName("noteCard");
+//   Array.from(noteCards).forEach(function (element) {
+//     let cardTxt = element.getElementsByTagName("p")[0].innerText;
+//     if (cardTxt.includes(inputVal)) {
+//       element.style.display = "block";
+//     } else {
+//       element.style.display = "none";
+//     }
+//   });
+// }
 
 // function to set a given theme/color-scheme
 function setTheme(themeName) {
