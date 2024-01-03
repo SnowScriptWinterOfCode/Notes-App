@@ -78,7 +78,9 @@
                     <audio src="sounds/mixkit-tile-game-reveal-960.wav" class="sound"></audio>
                 </h5>
                 <div class="form-group">
-                    <textarea class="form-control" id="heading" rows="1" placeholder="Title"></textarea> <br>
+                    <input class="form-control" id="heading" rows="1" placeholder="Title"
+                    onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addTxt').focus(); return false;}"
+                    ></input> <br>
                     <!-- Adding checkbox in  HTML -->
                     <input type="checkbox" id="useDefaultTitle"> Use Default Title <br>
                     <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 
