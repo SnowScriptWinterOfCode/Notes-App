@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">      
     <style>
         body{background: var(--color-secondary)}
 
@@ -27,7 +28,9 @@
 </head>
 
 <body>
-
+    <div class="scroll-up-btn">
+        <i class="fas fa-angle-up"></i>
+    </div>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
@@ -71,7 +74,6 @@
 
     <div class="container my-3">
         <h1 style="color: rgb(134, 153, 237);">Welcome To Notes</h1>
-        <div id="styled-message-container"></div>
         <div class="card">
             <div class="card-body" style="background: var(--color-secondary);">
                 <h5 class="card-title" style="color: rgb(134, 153, 237);">Add a note
@@ -79,12 +81,7 @@
                 </h5>
                 <div class="form-group">
                     <textarea class="form-control" id="heading" rows="1" placeholder="Title"></textarea> <br>
-                    <!-- Adding checkbox in  HTML -->
-                    <input type="checkbox" id="useDefaultTitle"> Use Default Title <br>
-                    <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 
-                    onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addBtn').click(); return false;}"
-                    ></textarea>
-
+                    <textarea class="form-control" id="addTxt" rows="3" placeholder="Note"></textarea>
                 </div>
                 <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
                 <button class="btn btn-primary" id="editBtn" style="margin-top: 7px;">DONE</button>
@@ -97,9 +94,11 @@
 
 
 <!-- *** Toast Message *** -->
-  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px;color: var(--font-color);  ">
+  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px ">
+    <div class="toast-body">
       <img src="images/check-mark.png" class="rounded mr-2" width="23px">
-      <span>Note Created Successfully!</span>
+      Note Created Successfully!
+    </div>
   </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
