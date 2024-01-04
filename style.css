@@ -154,3 +154,10 @@ input:checked+.slider:before {
   .scroll-up-btn:hover {
     filter: brightness(90%);
   }
+  .noteCard {
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+  }
+  .noteCard:hover {
+    transform: translateY(-30px); 
+  }
+  
