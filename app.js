@@ -11,35 +11,51 @@ let styledTitle = document.getElementById("styled-title");
 done.style.visibility = "hidden";
 //Event listeners
 addbtn.addEventListener("click", addaNote);
-searchTxt.addEventListener("input", searchtext);
+searchTxt.addEventListener("keypress", function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+      searchtext();
+  }
+});
 
 //Functions
 // let notesArray=[]
-function showNotes() {
-  const notes = localStorage.getItem("notes");
+function showNotes(searchTerm="") {
+  let notes = localStorage.getItem("notes");
   if (notes == null) {
     notesArray = [];
   } else {
     notesArray = JSON.parse(notes);
   }
-  let html = "";
-  notesArray.forEach(function (element, index) {
-    html += `
-            <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">${element[0]}</h5>
-                        <p class="card-text"> ${element[1]}</p>
-                        <button id="${index}" onclick="editNote(this.id)" class="btn btn-primary">Edit</button>
-                        <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete</button>
-                    </div>
-                </div>`;
+
+  let filteredNotes = notesArray.filter(function (element) {
+    let cardTitle = element[0].toLowerCase();
+    let cardTxt = element[1].toLowerCase();
+
+    return cardTitle.includes(searchTerm) || cardTxt.includes(searchTerm);
   });
+  console.log(filteredNotes);
+  console.log(searchTerm);
+  let html = "";
+  filteredNotes.forEach(function (element, index) {
+    html += `
+      <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">${element[0]}</h5>
+          <p class="card-text"> ${element[1]}</p>
+          <button id="${index}" onclick="editNote(this.id)" class="btn btn-primary">Edit</button>
+          <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete</button>
+        </div>
+      </div>`;
+  });
+
   let notesElm = document.getElementById("notes");
-  if (notesArray.length != 0) {
+  if (filteredNotes.length !== 0) {
     notesElm.innerHTML = html;
   } else {
-    notesElm.innerHTML = `Nothing to show! Use "Add a Note" section to add notes.`;
+    notesElm.innerHTML = `No matching notes found. Use "Add a Note" section to add notes.`;
   }
+
   notesElm.style.color = "rgb(115, 115, 115)";
   notesElm.style.fontSize = "20px";
 }
@@ -157,16 +173,17 @@ function deleteNote(index) {
   showNotes();
 }
 function searchtext() {
-  let inputVal = searchTxt.value;
-  let noteCards = document.getElementsByClassName("noteCard");
-  Array.from(noteCards).forEach(function (element) {
-    let cardTxt = element.getElementsByTagName("p")[0].innerText;
-    if (cardTxt.includes(inputVal)) {
-      element.style.display = "block";
-    } else {
-      element.style.display = "none";
-    }
-  });
+  let inputVal = searchTxt.value.toLowerCase();
+
+  const cardy=document.getElementsByClassName("card");
+  for (let i = 0; i < cardy.length; i++) {
+    cardy[i].style.display = "none";
+  }
+  let heading = document.querySelector("h1");
+  if (heading) {
+    heading.style.display = "none";
+  }
+  showNotes(inputVal);
 }
 
 // theme change function
@@ -206,3 +223,18 @@ function toggleMute() {
     volumeButton.classList.add("fa-volume-mute");
   }
 }
+document.addEventListener("DOMContentLoaded", function() {
+  window.addEventListener("scroll", function() {
+      var scrollY = window.scrollY || document.documentElement.scrollTop;
+
+      if (scrollY > 200) {
+          document.querySelector('.scroll-up-btn').classList.add("show");
+      } else {
+          document.querySelector('.scroll-up-btn').classList.remove("show");
+      }
+  });
+
+  document.querySelector('.scroll-up-btn').addEventListener("click", function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
