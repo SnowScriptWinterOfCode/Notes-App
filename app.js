@@ -7,6 +7,7 @@ const searchTxt = document.getElementById("searchTxt");
 const heading = document.getElementById("heading");
 const volumeButton = document.getElementById("mute-button");
 const styledMessageContainer = document.getElementById("styled-message-container");
+let styledTitle = document.getElementById("styled-title");
 done.style.visibility = "hidden";
 //Event listeners
 addbtn.addEventListener("click", addaNote);
@@ -82,7 +83,12 @@ function addaNote() {
     }
      }
      else if(heading.value === "" && !useDefaultTitle){
-       alert("Title cannot be empty.Please Click the checkbox for Default title or Enter the Title.");
+      styledTitle.innerHTML =
+        '<div class="alert alert-warning" role="alert" style="background: #b5f2fb;">Title cannot be empty! Please enter a title or check the below box for default title</div>';
+      setTimeout(() => {
+        styledTitle.innerHTML = "";
+      }
+      , 4000);
      }
      else {
        let title = heading.value;
