@@ -38,7 +38,10 @@
         <img class="logo" src="notes-1.png" alt="">
         
         <a class="navbar-brand" href="#">Notes</a>
-
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchTxt">
+            <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+        </form>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -81,7 +84,9 @@
                     <audio src="sounds/mixkit-tile-game-reveal-960.wav" class="sound"></audio>
                 </h5>
                 <div class="form-group">
-                    <textarea class="form-control" id="heading" rows="1" placeholder="Title"></textarea> <br>
+                    <input class="form-control" id="heading" rows="1" placeholder="Title"
+                    onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addTxt').focus(); return false;}"
+                    ></input> <br>
                     <!-- Adding checkbox in  HTML -->
                     <input type="checkbox" id="useDefaultTitle"> Use Default Title <br>
                     <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 

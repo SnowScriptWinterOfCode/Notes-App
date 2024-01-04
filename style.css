@@ -58,6 +58,12 @@ body {
   height: 0;
 }
 
+/* For input search-box */
+.form-inline .form-control {
+  width: 500px;
+  margin-right: 10px;
+}
+
 /* The slider */
 .slider {
   position: absolute;
