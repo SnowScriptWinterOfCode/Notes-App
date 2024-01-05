@@ -17,6 +17,10 @@ body {
   --font-color: #ffffff;
 }
 
+div p {
+  color: var(--font-color);
+}
+ 
 .container {
   display: flex;
   width: 100%;
