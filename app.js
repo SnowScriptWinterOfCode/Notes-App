@@ -18,6 +18,24 @@ searchTxt.addEventListener("keypress", function (event) {
   }
 });
 
+// Adding a debounce function 
+const debounce = (func, delay) => {
+  let timeout;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), delay);
+  };
+};
+
+// Modifying the searchTxt event listener to debounce the search function
+searchTxt.addEventListener(
+  "input",
+  debounce(() => {
+    searchtext();
+  }, 300)
+);
+
 //Functions
 // let notesArray=[]
 function showNotes(searchTerm="") {
