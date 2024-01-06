@@ -1,0 +1,1 @@
+const isMuted = localStorage.getItem("isMuted");

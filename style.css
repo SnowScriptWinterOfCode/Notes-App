@@ -1,8 +1,12 @@
-body {
-  background: var(--color-secondary);
+body{background: var(--color-secondary)}
+
+.toast{
+    color: white;
+    background: var(--color-secondary); 
 }
-
-
+.fade {
+    transition-duration: 1s;
+}
 .theme-light {
   --color-primary: #17ed90;
   --color-secondary: #fbfbfe;
