@@ -9,18 +9,18 @@ const volumeButton = document.getElementById("mute-button");
 const styledMessageContainer = document.getElementById("styled-message-container");
 let styledTitle = document.getElementById("styled-title");
 done.style.visibility = "hidden";
+
 //Event listeners
 addbtn.addEventListener("click", addaNote);
 searchTxt.addEventListener("keypress", function (event) {
   if (event.key === 'Enter') {
     event.preventDefault();
-      searchtext();
+    searchtext();
   }
 });
 
 //Functions
-// let notesArray=[]
-function showNotes(searchTerm="") {
+function showNotes(searchTerm = "") {
   let notes = localStorage.getItem("notes");
   if (notes == null) {
     notesArray = [];
@@ -62,7 +62,6 @@ function showNotes(searchTerm="") {
 
 function addaNote() {
   const audio = document.querySelector(".sound");
-
   const notes = localStorage.getItem("notes");
   if (notes == null) {
     notesArray = [];
@@ -71,48 +70,49 @@ function addaNote() {
   }
   let useDefaultTitle = document.getElementById("useDefaultTitle").checked;
   if (addtext.value !== "") {
-    if (heading.value === "" && useDefaultTitle){
+    if (heading.value === "" && useDefaultTitle) {
       let title = getDefaultTitle(addtext.value);
       notesArray.push([title, addtext.value]);
       localStorage.setItem("notes", JSON.stringify(notesArray));
       addtext.value = "";
       heading.value = "";
       $(".toast").toast("show");
-    if (volumeButton.classList.contains('fa-volume-up')) {
-      audio.play();
+      if (volumeButton.classList.contains('fa-volume-up')) {
+        audio.play();
+      }
     }
-     }
-     else if(heading.value === "" && !useDefaultTitle){
+    else if (heading.value === "" && !useDefaultTitle) {
       styledTitle.innerHTML =
         '<div class="alert alert-warning" role="alert" style="background: #b5f2fb;">Title cannot be empty! Please enter a title or check the below box for default title</div>';
       setTimeout(() => {
         styledTitle.innerHTML = "";
       }
-      , 4000);
-     }
-     else {
-       let title = heading.value;
-       notesArray.push([title, addtext.value]);
-       localStorage.setItem("notes", JSON.stringify(notesArray));
-       addtext.value = "";
-       heading.value = "";
-       $(".toast").toast("show");
-    if (volumeButton.classList.contains('fa-volume-up')) {
-      audio.play();
+        , 4000);
     }
-     } 
-    
-  } else {
-      styledMessageContainer.innerHTML =
-        '<div class="alert alert-warning" role="alert">Notes cannot be empty!</div>';
-      setTimeout(() => {
-        styledMessageContainer.innerHTML = "";
+    else {
+      let title = heading.value;
+      notesArray.push([title, addtext.value]);
+      localStorage.setItem("notes", JSON.stringify(notesArray));
+      addtext.value = "";
+      heading.value = "";
+      $(".toast").toast("show");
+      if (volumeButton.classList.contains('fa-volume-up')) {
+        audio.play();
       }
+    }
+
+  } else {
+    styledMessageContainer.innerHTML =
+      '<div class="alert alert-warning" role="alert">Notes cannot be empty!</div>';
+    setTimeout(() => {
+      styledMessageContainer.innerHTML = "";
+    }
       , 2000);
-     
+
   }
   showNotes();
 }
+
 // Function to get default title from the first two words of text
 function getDefaultTitle(text) {
   let words = text.split(" ");
@@ -138,7 +138,7 @@ function editNote(index) {
     const update = [heading.value + " (Edited) " + " " + n, addtext.value];
     console.log(update);
 
-    
+
     if (update.length > 0) {
       notesObj.splice(index, 1, update);
 
@@ -159,23 +159,21 @@ function editNote(index) {
 }
 
 function deleteNote(index) {
-  //   console.log("I am deleting", index);
-
   const notes = localStorage.getItem("notes");
   if (notes == null) {
     notesObj = [];
   } else {
     notesObj = JSON.parse(notes);
   }
-
   notesObj.splice(index, 1);
   localStorage.setItem("notes", JSON.stringify(notesObj));
   showNotes();
 }
+
 function searchtext() {
   let inputVal = searchTxt.value.toLowerCase();
 
-  const cardy=document.getElementsByClassName("card");
+  const cardy = document.getElementsByClassName("card");
   for (let i = 0; i < cardy.length; i++) {
     cardy[i].style.display = "none";
   }
@@ -185,8 +183,6 @@ function searchtext() {
   }
   showNotes(inputVal);
 }
-
-// theme change function
 
 // function to set a given theme/color-scheme
 function setTheme(themeName) {
@@ -223,18 +219,18 @@ function toggleMute() {
     volumeButton.classList.add("fa-volume-mute");
   }
 }
-document.addEventListener("DOMContentLoaded", function() {
-  window.addEventListener("scroll", function() {
-      var scrollY = window.scrollY || document.documentElement.scrollTop;
+document.addEventListener("DOMContentLoaded", function () {
+  window.addEventListener("scroll", function () {
+    var scrollY = window.scrollY || document.documentElement.scrollTop;
 
-      if (scrollY > 200) {
-          document.querySelector('.scroll-up-btn').classList.add("show");
-      } else {
-          document.querySelector('.scroll-up-btn').classList.remove("show");
-      }
+    if (scrollY > 200) {
+      document.querySelector('.scroll-up-btn').classList.add("show");
+    } else {
+      document.querySelector('.scroll-up-btn').classList.remove("show");
+    }
   });
 
-  document.querySelector('.scroll-up-btn').addEventListener("click", function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelector('.scroll-up-btn').addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
