@@ -52,26 +52,19 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
                 </li>
-
             </ul>
             <i id="mute-button" onclick="toggleMute()" class='fas fa-volume-up blue-mute'></i>
             <form class="form-inline my-2 my-lg-0">
-
-                <!-- theme switcher -->
                 <div class="container">
-
-                    <label id="switch" class="switch">
-
-                        <input type="checkbox" onchange="toggleTheme()" id="slider">
-                        <span class="slider round"></span>
-
-                        <!-- <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" id="searchTxt" type="search" placeholder="Search" aria-label="Search"> -->
-            </form>
-
+                  <label id="switch" class="switch">
+                    <input type="checkbox" onchange="toggleTheme()" id="slider">
+                    <span class="slider round">
+                      <i id="icon" class="fas fa-sun"></i>
+                    </span>
+                  </label>
+                </div>
+            </form>              
         </div>
-        </div>
-
     </nav>
     <!-- navbar -->
 

@@ -14,13 +14,13 @@ addbtn.addEventListener("click", addaNote);
 searchTxt.addEventListener("keypress", function (event) {
   if (event.key === 'Enter') {
     event.preventDefault();
-      searchtext();
+    searchtext();
   }
 });
 
 //Functions
 // let notesArray=[]
-function showNotes(searchTerm="") {
+function showNotes(searchTerm = "") {
   let notes = localStorage.getItem("notes");
   if (notes == null) {
     notesArray = [];
@@ -71,45 +71,45 @@ function addaNote() {
   }
   let useDefaultTitle = document.getElementById("useDefaultTitle").checked;
   if (addtext.value !== "") {
-    if (heading.value === "" && useDefaultTitle){
+    if (heading.value === "" && useDefaultTitle) {
       let title = getDefaultTitle(addtext.value);
       notesArray.push([title, addtext.value]);
       localStorage.setItem("notes", JSON.stringify(notesArray));
       addtext.value = "";
       heading.value = "";
       $(".toast").toast("show");
-    if (volumeButton.classList.contains('fa-volume-up')) {
-      audio.play();
+      if (volumeButton.classList.contains('fa-volume-up')) {
+        audio.play();
+      }
     }
-     }
-     else if(heading.value === "" && !useDefaultTitle){
+    else if (heading.value === "" && !useDefaultTitle) {
       styledTitle.innerHTML =
         '<div class="alert alert-warning" role="alert" style="background: #b5f2fb;">Title cannot be empty! Please enter a title or check the below box for default title</div>';
       setTimeout(() => {
         styledTitle.innerHTML = "";
       }
-      , 4000);
-     }
-     else {
-       let title = heading.value;
-       notesArray.push([title, addtext.value]);
-       localStorage.setItem("notes", JSON.stringify(notesArray));
-       addtext.value = "";
-       heading.value = "";
-       $(".toast").toast("show");
-    if (volumeButton.classList.contains('fa-volume-up')) {
-      audio.play();
+        , 4000);
     }
-     } 
-    
-  } else {
-      styledMessageContainer.innerHTML =
-        '<div class="alert alert-warning" role="alert">Notes cannot be empty!</div>';
-      setTimeout(() => {
-        styledMessageContainer.innerHTML = "";
+    else {
+      let title = heading.value;
+      notesArray.push([title, addtext.value]);
+      localStorage.setItem("notes", JSON.stringify(notesArray));
+      addtext.value = "";
+      heading.value = "";
+      $(".toast").toast("show");
+      if (volumeButton.classList.contains('fa-volume-up')) {
+        audio.play();
       }
+    }
+
+  } else {
+    styledMessageContainer.innerHTML =
+      '<div class="alert alert-warning" role="alert">Notes cannot be empty!</div>';
+    setTimeout(() => {
+      styledMessageContainer.innerHTML = "";
+    }
       , 2000);
-     
+
   }
   showNotes();
 }
@@ -138,7 +138,7 @@ function editNote(index) {
     const update = [heading.value + " (Edited) " + " " + n, addtext.value];
     console.log(update);
 
-    
+
     if (update.length > 0) {
       notesObj.splice(index, 1, update);
 
@@ -175,7 +175,7 @@ function deleteNote(index) {
 function searchtext() {
   let inputVal = searchTxt.value.toLowerCase();
 
-  const cardy=document.getElementsByClassName("card");
+  const cardy = document.getElementsByClassName("card");
   for (let i = 0; i < cardy.length; i++) {
     cardy[i].style.display = "none";
   }
@@ -186,31 +186,37 @@ function searchtext() {
   showNotes(inputVal);
 }
 
-// theme change function
-
-// function to set a given theme/color-scheme
 function setTheme(themeName) {
-  localStorage.setItem("theme", themeName);
+  // localStorage.setItem("theme", themeName);
   document.documentElement.className = themeName;
 }
 
-// function to toggle between light and dark theme
 function toggleTheme() {
-  if (localStorage.getItem("theme") === "theme-dark") {
-    setTheme("theme-light");
-  } else {
+  var slider = document.getElementById("slider");
+  var icon = document.getElementById("icon");
+
+  if (slider.checked) {
     setTheme("theme-dark");
+    icon.classList.remove("fa-sun");
+    icon.classList.add("fa-moon");
+  } else {
+    setTheme("theme-light");
+    icon.classList.remove("fa-moon");
+    icon.classList.add("fa-sun");
   }
 }
 
-// Immediately invoked function to set the theme on initial load
 (function () {
   if (localStorage.getItem("theme") === "theme-dark") {
     setTheme("theme-dark");
     document.getElementById("slider").checked = false;
+    document.getElementById("icon").classList.remove("fa-sun");
+    document.getElementById("icon").classList.add("fa-moon");
   } else {
     setTheme("theme-light");
     document.getElementById("slider").checked = true;
+    document.getElementById("icon").classList.remove("fa-moon");
+    document.getElementById("icon").classList.add("fa-sun");
   }
 })();
 
@@ -223,18 +229,18 @@ function toggleMute() {
     volumeButton.classList.add("fa-volume-mute");
   }
 }
-document.addEventListener("DOMContentLoaded", function() {
-  window.addEventListener("scroll", function() {
-      var scrollY = window.scrollY || document.documentElement.scrollTop;
+document.addEventListener("DOMContentLoaded", function () {
+  window.addEventListener("scroll", function () {
+    var scrollY = window.scrollY || document.documentElement.scrollTop;
 
-      if (scrollY > 200) {
-          document.querySelector('.scroll-up-btn').classList.add("show");
-      } else {
-          document.querySelector('.scroll-up-btn').classList.remove("show");
-      }
+    if (scrollY > 200) {
+      document.querySelector('.scroll-up-btn').classList.add("show");
+    } else {
+      document.querySelector('.scroll-up-btn').classList.remove("show");
+    }
   });
 
-  document.querySelector('.scroll-up-btn').addEventListener("click", function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelector('.scroll-up-btn').addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
