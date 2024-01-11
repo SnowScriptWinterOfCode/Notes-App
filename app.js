@@ -39,7 +39,7 @@ function showNotes(searchTerm="") {
   let html = "";
   filteredNotes.forEach(function (element, index) {
     html += `
-      <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
+      <div class="noteCard my-2 card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">${element[0]}</h5>
           <p class="card-text"> ${element[1]}</p>

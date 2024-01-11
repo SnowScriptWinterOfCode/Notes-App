@@ -162,6 +162,7 @@ input:checked+.slider:before {
     transition: background-color 0.3s ease, transform 0.3s ease; 
   }
   .noteCard:hover {
-    transform: translateY(-30px); 
+    transform: translateY(-5%); 
+    box-shadow: 0 0 10px 0 rgb(166, 166, 166);
   }
   
