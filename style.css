@@ -119,3 +119,18 @@ body {
     margin-right: 20px;
     cursor: pointer;
   }
+  #btn{
+    margin-left:45rem;
+    padding:8px;
+    background-color: #d8d7e5;
+    font-weight: bolder;
+    border-radius:5px;
+    border:2px solid rgb(25, 24, 24);
+    width:56px;
+    cursor:pointer;
+    box-shadow:2px 2px #637cf3;
+    
+  }
+ a{
+  color: white;
+ }
