@@ -7,12 +7,10 @@ let searchTxt = document.getElementById("searchTxt");
 let heading = document.getElementById("heading");
 let volumeButton = document.getElementById('mute-button');
 done.style.visibility="hidden";
-//Event listeners
+
 addbtn.addEventListener("click", addaNote);
 searchTxt.addEventListener("input", searchtext);
 
-//Functions
-// let notesArray=[]
 function showNotes() {
   let notes = localStorage.getItem("notes");
   if (notes == null) {
