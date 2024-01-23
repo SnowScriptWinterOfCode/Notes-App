@@ -39,12 +39,16 @@ function showNotes(searchTerm = "") {
   let html = "";
   filteredNotes.forEach(function (element, index) {
     html += `
-      <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
+      <div class="noteCard my-2 card" style="width: 18rem;">
         <div class="card-body">
+        <div style="display:flex; justify-content:space-between;" >
           <h5 class="card-title">${element[0]}</h5>
+          <div style="position:relative; left:0; cursor:pointer">
+            <i id="${index}" onclick="editNote(this.id)" class="fas fa-edit btn btn-primary"></i>
+            <i id="${index}" onclick="deleteNote(this.id)" class="fas fa-trash-alt btn btn-danger"></i>
+          </div>
+        </div>
           <p class="card-text"> ${element[1]}</p>
-          <button id="${index}" onclick="editNote(this.id)" class="btn btn-primary">Edit</button>
-          <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete</button>
         </div>
       </div>`;
   });
@@ -128,35 +132,51 @@ function editNote(index) {
   } else {
     notesObj = JSON.parse(notes);
   }
+
   heading.value = notesObj[index][0].replace(/ \(Edited\) .*/, '');
   addtext.value = notesObj[index][1];
-  let d = new Date();
-  let n = d.toLocaleTimeString();
 
   done.onclick = () => {
+    const updatedHeading = heading.value.trim(); // Trim leading and trailing spaces
+    const updatedAddText = addtext.value.trim(); // Trim leading and trailing spaces
 
-    const update = [heading.value + " (Edited) " + " " + n, addtext.value];
-    console.log(update);
+    if (!updatedAddText) {
+      window.alert("Note cannot be empty. Your item will be deleted.");
+      notesObj.splice(index, 1);
+      localStorage.setItem("notes", JSON.stringify(notesObj));
+      showNotes();
+    } else {
+      let headingString = updatedHeading;
 
+      // Check if "Use Default Title" option is checked
+      if (document.getElementById("useDefaultTitle").checked) {
+        // Use the first two words of addtext as the title
+        const words = updatedAddText.split(" ");
+        headingString = words.length >= 2 ? `${words[0]} ${words[1]}` : updatedHeading;
+      }
 
-    if (update.length > 0) {
+      // Check if heading is not empty before appending "(Edited) " + " " + n
+      if (headingString) {
+        headingString += " (Edited) " + new Date().toLocaleTimeString();
+        const update = [headingString, updatedAddText];
+
       notesObj.splice(index, 1, update);
-
       localStorage.setItem("notes", JSON.stringify(notesObj));
       showNotes();
       heading.value = "";
       addtext.value = "";
-
       addbtn.style.visibility = "visible";
       done.style.visibility = "hidden";
-    } else {
-      window.alert("Can not be empty,Your item will get delted.");
-      notesObj.splice(index, 1);
-      localStorage.setItem("notes", JSON.stringify(notesObj));
-      showNotes();
+      } 
+      else {
+        // Heading is empty, show an alert message
+        window.alert("Heading cannot be empty.");
+      }
     }
   };
 }
+
+
 
 function deleteNote(index) {
   const notes = localStorage.getItem("notes");
@@ -165,9 +185,16 @@ function deleteNote(index) {
   } else {
     notesObj = JSON.parse(notes);
   }
-  notesObj.splice(index, 1);
-  localStorage.setItem("notes", JSON.stringify(notesObj));
-  showNotes();
+  const confirmation = window.confirm("Are you sure you want to delete this note?");
+  
+  if (confirmation) {
+
+    notesObj.splice(index, 1);
+    localStorage.setItem("notes", JSON.stringify(notesObj));
+    showNotes();
+    
+  }
+
 }
 
 function searchtext() {
@@ -184,29 +211,37 @@ function searchtext() {
   showNotes(inputVal);
 }
 
-// function to set a given theme/color-scheme
 function setTheme(themeName) {
-  localStorage.setItem("theme", themeName);
+  // localStorage.setItem("theme", themeName);
   document.documentElement.className = themeName;
 }
 
-// function to toggle between light and dark theme
 function toggleTheme() {
-  if (localStorage.getItem("theme") === "theme-dark") {
-    setTheme("theme-light");
-  } else {
+  var slider = document.getElementById("slider");
+  var icon = document.getElementById("icon");
+
+  if (slider.checked) {
     setTheme("theme-dark");
+    icon.classList.remove("fa-sun");
+    icon.classList.add("fa-moon");
+  } else {
+    setTheme("theme-light");
+    icon.classList.remove("fa-moon");
+    icon.classList.add("fa-sun");
   }
 }
 
-// Immediately invoked function to set the theme on initial load
 (function () {
   if (localStorage.getItem("theme") === "theme-dark") {
     setTheme("theme-dark");
     document.getElementById("slider").checked = false;
+    document.getElementById("icon").classList.remove("fa-sun");
+    document.getElementById("icon").classList.add("fa-moon");
   } else {
     setTheme("theme-light");
     document.getElementById("slider").checked = true;
+    document.getElementById("icon").classList.remove("fa-moon");
+    document.getElementById("icon").classList.add("fa-sun");
   }
 })();
 

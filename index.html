@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">      
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body{background: var(--color-secondary)}
 
@@ -80,6 +81,8 @@
                     <input class="form-control" id="heading" rows="1" placeholder="Title"
                     onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addTxt').focus(); return false;}"
                     ></input> 
+                    <span id="styled-title"></span>
+                    
                     <br>
 
                     <!-- Adding checkbox in  HTML -->
@@ -93,9 +96,9 @@
                 <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
                 <button class="btn btn-primary" id="editBtn" style="margin-top: 7px;">DONE</button>
             </div>
-
-        <h3 style="color: rgb(134, 153, 237); margin-top: 8px;">Your Notes</h3>
-        <div id="notes" class="row container-fluid"> </div>
+        </div>
+        <h3 style="color: rgb(134, 153, 237); margin:1rem 0;">Your Notes</h3>
+        <div id="notes" class="row container-fluid" style="gap: 1rem;"> </div>
     </div>
 </div>
 
