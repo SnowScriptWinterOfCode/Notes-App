@@ -9,6 +9,7 @@ const volumeButton = document.getElementById("mute-button");
 const styledMessageContainer = document.getElementById("styled-message-container");
 let styledTitle = document.getElementById("styled-title");
 done.style.visibility = "hidden";
+
 //Event listeners
 addbtn.addEventListener("click", addaNote);
 searchTxt.addEventListener("keypress", function (event) {
@@ -19,7 +20,6 @@ searchTxt.addEventListener("keypress", function (event) {
 });
 
 //Functions
-// let notesArray=[]
 function showNotes(searchTerm = "") {
   let notes = localStorage.getItem("notes");
   if (notes == null) {
@@ -66,7 +66,6 @@ function showNotes(searchTerm = "") {
 
 function addaNote() {
   const audio = document.querySelector(".sound");
-
   const notes = localStorage.getItem("notes");
   if (notes == null) {
     notesArray = [];
@@ -117,6 +116,7 @@ function addaNote() {
   }
   showNotes();
 }
+
 // Function to get default title from the first two words of text
 function getDefaultTitle(text) {
   let words = text.split(" ");
@@ -179,8 +179,6 @@ function editNote(index) {
 
 
 function deleteNote(index) {
-  //   console.log("I am deleting", index);
-
   const notes = localStorage.getItem("notes");
   if (notes == null) {
     notesObj = [];
@@ -198,6 +196,7 @@ function deleteNote(index) {
   }
 
 }
+
 function searchtext() {
   let inputVal = searchTxt.value.toLowerCase();
 
