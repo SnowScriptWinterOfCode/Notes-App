@@ -212,31 +212,37 @@ function searchtext() {
   showNotes(inputVal);
 }
 
-// theme change function
-
-// function to set a given theme/color-scheme
 function setTheme(themeName) {
-  localStorage.setItem("theme", themeName);
+  // localStorage.setItem("theme", themeName);
   document.documentElement.className = themeName;
 }
 
-// function to toggle between light and dark theme
 function toggleTheme() {
-  if (localStorage.getItem("theme") === "theme-dark") {
-    setTheme("theme-light");
-  } else {
+  var slider = document.getElementById("slider");
+  var icon = document.getElementById("icon");
+
+  if (slider.checked) {
     setTheme("theme-dark");
+    icon.classList.remove("fa-sun");
+    icon.classList.add("fa-moon");
+  } else {
+    setTheme("theme-light");
+    icon.classList.remove("fa-moon");
+    icon.classList.add("fa-sun");
   }
 }
 
-// Immediately invoked function to set the theme on initial load
 (function () {
   if (localStorage.getItem("theme") === "theme-dark") {
     setTheme("theme-dark");
     document.getElementById("slider").checked = false;
+    document.getElementById("icon").classList.remove("fa-sun");
+    document.getElementById("icon").classList.add("fa-moon");
   } else {
     setTheme("theme-light");
     document.getElementById("slider").checked = true;
+    document.getElementById("icon").classList.remove("fa-moon");
+    document.getElementById("icon").classList.add("fa-sun");
   }
 })();
 
