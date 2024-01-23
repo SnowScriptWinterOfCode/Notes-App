@@ -187,10 +187,16 @@ function deleteNote(index) {
   } else {
     notesObj = JSON.parse(notes);
   }
+  const confirmation = window.confirm("Are you sure you want to delete this note?");
+  
+  if (confirmation) {
 
-  notesObj.splice(index, 1);
-  localStorage.setItem("notes", JSON.stringify(notesObj));
-  showNotes();
+    notesObj.splice(index, 1);
+    localStorage.setItem("notes", JSON.stringify(notesObj));
+    showNotes();
+    
+  }
+
 }
 function searchtext() {
   let inputVal = searchTxt.value.toLowerCase();
