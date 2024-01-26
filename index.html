@@ -14,10 +14,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
+        .center-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .image-container {
+            width: 500px;
+            height: 400px;
+            margin: 0;
+        }
         body{background: var(--color-secondary)}
 
         .toast{
-            color: white;
+            color: rgb(243, 66, 12);
             background: var(--color-secondary); 
         }
         .fade {
@@ -26,7 +38,7 @@
     </style>
 </head>
 
-<body>
+<body >
 
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -68,10 +80,16 @@
 
     </nav>
     <!-- navbar -->
-
-    <div class="container my-3">
+    <div class="center-image">
+    <div class="image-container">
+        <img src="boy.jpg" style="width: 100%; height: 100%;" alt="Boy Image">
+    </div>
+    <div class="container my-3" style="margin-top: 0px;">
+       
         <h1 style="color: rgb(134, 153, 237);">Welcome To Notes</h1>
+
         <div class="card">
+            <!-- <img src="boy.jpg"  style="width: 300px; height: 200px; border: 2px solid #333;"/> -->
             <div class="card-body" style="background: var(--color-secondary);">
                 <h5 class="card-title" style="color: rgb(134, 153, 237);">Add a note
                     <audio src="sounds/mixkit-tile-game-reveal-960.wav" class="sound"></audio>
@@ -88,12 +106,13 @@
         <div id="notes" class="row container-fluid"> </div>
     </div>
 </div>
+</div>
 
 
 <!-- *** Toast Message *** -->
-  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px ">
-    <div class="toast-body">
-      <img src="images/check-mark.png" class="rounded mr-2" width="23px">
+  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px; background-color: rgb(201, 235, 11); ">
+    <div class="toast-body" style="background-color: rgb(201, 235, 11);">
+      <img src="images/check-mark.png" class="rounded mr-2" width="23px" style="background-color: rgb(201, 235, 11);">
       Note Created Successfully!
     </div>
   </div>
