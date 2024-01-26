@@ -29,29 +29,42 @@ function showNotes(searchTerm = "") {
   }
 
   let filteredNotes = notesArray.filter(function (element) {
-    let cardTitle = element[0].toLowerCase();
-    let cardTxt = element[1].toLowerCase();
+    let cardTitle = element.title.toLowerCase();
+    let cardTxt = element.text.toLowerCase();
 
     return cardTitle.includes(searchTerm) || cardTxt.includes(searchTerm);
   });
-  console.log(filteredNotes);
-  console.log(searchTerm);
+
   let html = "";
-  filteredNotes.forEach(function (element, index) {
-    html += `
-      <div class="noteCard my-2 card" style="width: 18rem;">
-        <div class="card-body">
-        <div style="display:flex; justify-content:space-between;" >
-          <h5 class="card-title">${element[0]}</h5>
-          <div style="position:relative; left:0; cursor:pointer">
-            <i id="${index}" onclick="editNote(this.id)" class="fas fa-edit btn btn-primary"></i>
-            <i id="${index}" onclick="deleteNote(this.id)" class="fas fa-trash-alt btn btn-danger"></i>
-          </div>
-        </div>
-          <p class="card-text"> ${element[1]}</p>
-        </div>
-      </div>`;
+  let groupedNotes = {};
+
+  filteredNotes.forEach(function (element) {
+    const label = element.label || "Uncategorized";
+    if (!groupedNotes[label]) {
+      groupedNotes[label] = [];
+    }
+    groupedNotes[label].push(element);
   });
+
+  for (const label in groupedNotes) {
+    html += `<h3>${label}</h3>`;
+    groupedNotes[label].forEach(function (element, index) {
+      html += `
+        <div class="noteCard my-2 card" style="width: 18rem;">
+          <div class="card-body">
+            <div style="display:flex; justify-content:space-between;" >
+              <h5 class="card-title">${element.title}</h5>
+              <div style="position:relative; left:0; cursor:pointer">
+              
+                <i id="${index}" onclick="editNote(this.id)" class="fas fa-edit btn btn-primary"></i>
+                <i id="${index}" onclick="deleteNote(this.id)" class="fas fa-trash-alt btn btn-danger"></i>
+              </div>
+            </div>
+            <p class="card-text">${element.text}</p>
+          </div>
+        </div>`;
+    });
+  }
 
   let notesElm = document.getElementById("notes");
   if (filteredNotes.length !== 0) {
@@ -73,46 +86,44 @@ function addaNote() {
     notesArray = JSON.parse(notes);
   }
   let useDefaultTitle = document.getElementById("useDefaultTitle").checked;
-  if (addtext.value !== "") {
-    if (heading.value === "" && useDefaultTitle) {
-      let title = getDefaultTitle(addtext.value);
-      notesArray.push([title, addtext.value]);
-      localStorage.setItem("notes", JSON.stringify(notesArray));
-      addtext.value = "";
-      heading.value = "";
-      $(".toast").toast("show");
-      if (volumeButton.classList.contains('fa-volume-up')) {
-        audio.play();
-      }
-    }
-    else if (heading.value === "" && !useDefaultTitle) {
-      styledTitle.innerHTML =
-        '<div class="alert alert-warning" role="alert" style="background: #b5f2fb;">Title cannot be empty! Please enter a title or check the below box for default title</div>';
-      setTimeout(() => {
-        styledTitle.innerHTML = "";
-      }
-        , 4000);
-    }
-    else {
-      let title = heading.value;
-      notesArray.push([title, addtext.value]);
-      localStorage.setItem("notes", JSON.stringify(notesArray));
-      addtext.value = "";
-      heading.value = "";
-      $(".toast").toast("show");
-      if (volumeButton.classList.contains('fa-volume-up')) {
-        audio.play();
-      }
-    }
+  let label = document.getElementById("labelInput").value.trim() || null;
 
+  if (addtext.value !== "") {
+    if (useDefaultTitle) {
+      let title = getDefaultTitle(addtext.value);
+      notesArray.push({ label: label, title: title, text: addtext.value });
+      localStorage.setItem("notes", JSON.stringify(notesArray));
+      addtext.value = "";
+      heading.value = "";
+      $(".toast").toast("show");
+      if (volumeButton.classList.contains('fa-volume-up')) {
+        audio.play();
+      }
+    } else {
+      if (heading.value === "") {
+        styledTitle.innerHTML =
+          '<div class="alert alert-warning" role="alert" style="background: #b5f2fb;">Title cannot be empty! Please enter a title or check the below box for default title</div>';
+        setTimeout(() => {
+          styledTitle.innerHTML = "";
+        }, 4000);
+      } else {
+        let title = heading.value;
+        notesArray.push({ label: label, title: title, text: addtext.value });
+        localStorage.setItem("notes", JSON.stringify(notesArray));
+        addtext.value = "";
+        heading.value = "";
+        $(".toast").toast("show");
+        if (volumeButton.classList.contains('fa-volume-up')) {
+          audio.play();
+        }
+      }
+    }
   } else {
     styledMessageContainer.innerHTML =
       '<div class="alert alert-warning" role="alert">Notes cannot be empty!</div>';
     setTimeout(() => {
       styledMessageContainer.innerHTML = "";
-    }
-      , 2000);
-
+    }, 2000);
   }
   showNotes();
 }
