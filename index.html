@@ -35,6 +35,29 @@
         .fade {
             transition-duration: 1s;
         }
+                 
+        .btn-grad {
+            background-image: linear-gradient(to right, #9259b8 0%, #49a09d  51%, #af68df  100%);
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+            
+          }
+
+          .btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+            transform: scale(1.1);
+          }
+         
     </style>
 </head>
 
@@ -97,8 +120,9 @@
                     <textarea class="form-control" id="heading" rows="1" placeholder="Title"></textarea> <br>
                     <textarea class="form-control" id="addTxt" rows="3" placeholder="Note"></textarea>
                 </div>
-                <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
-                <button class="btn btn-primary" id="editBtn" style="margin-top: 7px;">DONE</button>
+                
+                <button class="btn-grad" id="addBtn" style="margin-top: 7px; padding-left: 65px; padding-right: 65px;">Add Note</button>
+                <button class="btn-grad" id="editBtn" style="margin-top: 7px;padding-left: 65px; padding-right: 65px;">DONE</button>
             </div>
         </div>
         <h3 style="color: rgb(134, 153, 237); margin-top: 8px;">Your Notes</h3>
