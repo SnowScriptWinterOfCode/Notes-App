@@ -6,14 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src='https://kit.fontawesome.com/49a2f38d1d.js' crossorigin='anonymous'></script>
-    <title>Notes app</title>
+    <title>NOTES APP</title>
 
-    <link rel = "icon" href = "notes-1.png" type = "image/x-icon">
+    <link rel = "icon" href = "images/notes-1.png" type = "image/x-icon">
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">      
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body{background: var(--color-secondary)}
 
@@ -31,17 +32,17 @@
     <div class="scroll-up-btn">
         <i class="fas fa-angle-up"></i>
     </div>
+
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-
-        <img class="logo" src="notes-1.png" alt="">
+        <img class="logo" src="images/notes-1.png" alt="">
         
         <a class="navbar-brand" href="#">Notes</a>
+
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchTxt">
-            <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
         </form>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -52,26 +53,19 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
                 </li>
-
             </ul>
             <i id="mute-button" onclick="toggleMute()" class='fas fa-volume-up blue-mute'></i>
-            <form class="form-inline my-2 my-lg-0">
 
+            <form class="form-inline my-2 my-lg-0">
                 <!-- theme switcher -->
                 <div class="container">
-
                     <label id="switch" class="switch">
-
                         <input type="checkbox" onchange="toggleTheme()" id="slider">
                         <span class="slider round"></span>
-
-                        <!-- <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" id="searchTxt" type="search" placeholder="Search" aria-label="Search"> -->
+                    </label>
+                </div>
             </form>
-
         </div>
-        </div>
-
     </nav>
     <!-- navbar -->
 
@@ -86,9 +80,14 @@
                 <div class="form-group">
                     <input class="form-control" id="heading" rows="1" placeholder="Title"
                     onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addTxt').focus(); return false;}"
-                    ></input> <br>
+                    ></input> 
+                    <span id="styled-title"></span>
+                    
+                    <br>
+
                     <!-- Adding checkbox in  HTML -->
-                    <input type="checkbox" id="useDefaultTitle"> Use Default Title<br> 
+                    <input type="checkbox" id="useDefaultTitle"> Use Default Title <br>
+
                     <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 
                     onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addBtn').click(); return false;}"
                     ></textarea>

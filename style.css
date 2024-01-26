@@ -20,14 +20,18 @@ body {
 .form-group {
   color: var(--font-color);
 }
- 
+
 .container {
   display: flex;
   width: 100%;
   height: 100%;
-  background: var(--color-secondary);
   flex-direction: column;
+  background: var(--color-secondary);
+}
 
+
+.contain-icon{
+  color: #fff;
 }
 
 .container h6 {
@@ -47,19 +51,14 @@ body {
   margin-right: 1rem;
 }
 
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
 /* Hide default HTML checkbox */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
+}
+#icon{
+  cursor: pointer;
 }
 
 /* For input search-box */
@@ -68,62 +67,47 @@ body {
   margin-right: 10px;
 }
 
-/* The slider */
-.slider {
-  position: absolute;
+.blue-mute {
+  color: #637cf3;
+  font-size: 40px;
+  margin-right: 20px;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
 }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 40px;
-  width: 40px;
-  left: 0px;
-  bottom: 4px;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  box-shadow: 0 0px 15px #2020203d;
-  background: white url('https://i.ibb.co/7JfqXxB/sunny.png');
-  background-repeat: no-repeat;
-  background-position: center;
+.scroll-up-btn {
+  position: fixed;
+  height: 45px;
+  width: 42px;
+  background: #2980b9;
+  right: 30px;
+  bottom: 10px;
+  text-align: center;
+  line-height: 45px;
+  color: #fff;
+  z-index: 9999;
+  font-size: 30px;
+  border-radius: 6px;
+  border-bottom-width: 2px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
 }
 
-input:checked+.slider {
-  background-color: #2196f3;
+.scroll-up-btn.show {
+  bottom: 30px;
+  opacity: 1;
+  pointer-events: auto;
 }
 
-input:focus+.slider {
-  box-shadow: 0 0 1px #2196f3;
+.scroll-up-btn:hover {
+  filter: brightness(90%);
 }
 
-input:checked+.slider:before {
-  -webkit-transform: translateX(24px);
-  -ms-transform: translateX(24px);
-  transform: translateX(24px);
-  background: white url('https://i.ibb.co/FxzBYR9/night.png');
-  background-repeat: no-repeat;
-  background-position: center;
+.noteCard {
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
 
 .blue-mute {
   color: #637cf3;
@@ -189,4 +173,9 @@ input:checked+.slider:before {
  }
 
   
+
+
+.noteCard:hover {
+  transform: translateY(-30px);
+}
 
