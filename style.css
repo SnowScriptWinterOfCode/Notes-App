@@ -30,8 +30,8 @@ body {
   .container button {
     /*color: var(--font-color);
     background: #2196f3;*/
-    background-image: linear-gradient(to right, #1a2846 0%, #4a9bbb  51%, #152db9  100%);
-    padding: 10px 25px;
+    background-image: linear-gradient(to right, #221b4e 0%, #7e8fdf  51%, #3746c7  100%);
+    padding: 10px 20px;
     /* border: 0; */
    
     
@@ -39,7 +39,7 @@ body {
   .container button:hover{
     transform: scale(1.1); 
     transition: transform 0.3s ease; 
-    
+
   }
 
   .logo{
