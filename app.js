@@ -1,4 +1,4 @@
-//DOM selectors
+
 showNotes();
 let addbtn = document.getElementById("addBtn");
 let done = document.getElementById("editBtn");
