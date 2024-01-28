@@ -160,7 +160,6 @@ function editNote(index) {
   } else {
     notesObj = JSON.parse(notes);
   }
-
   heading.value = notesObj[index].title.replace(/ \(Edited\) .*/, '');
   addtext.value = notesObj[index].text;
 
