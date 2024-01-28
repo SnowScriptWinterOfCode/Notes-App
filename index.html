@@ -16,6 +16,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">      
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        .center-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .image-container {
+            width: 500px;
+            height: 400px;
+        }
         body{background: var(--color-secondary)}
 
         .toast{
@@ -25,6 +37,29 @@
         .fade {
             transition-duration: 1s;
         }
+                 
+        .btn-grad {
+            background-image: linear-gradient(to right, #9259b8 0%, #49a09d  51%, #af68df  100%);
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+            
+          }
+
+          .btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+            transform: scale(1.1);
+          }
+         
     </style>
 </head>
 
@@ -67,9 +102,15 @@
             </form>
         </div>
     </nav>
+    
     <!-- navbar -->
-
+    <div class="center-image">
+        <div class="image-container">
+            <img src="boy.jpg" style="width: 100%; height: 100%;" alt="Boy Image">
+        </div>
     <div class="container my-3">
+    
+        
         <h1 style="color: rgb(134, 153, 237);">Welcome To Notes</h1>
         <div id="styled-message-container"></div>
         <div class="card">
@@ -78,6 +119,8 @@
                     <audio src="sounds/mixkit-tile-game-reveal-960.wav" class="sound"></audio>
                 </h5>
                 <div class="form-group">
+                    <input class="form-control" id="labelInput" rows="1" placeholder="Label"></input>
+                    <br>
                     <input class="form-control" id="heading" rows="1" placeholder="Title"
                     onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addTxt').focus(); return false;}"
                     ></input> 
@@ -88,24 +131,33 @@
                     <!-- Adding checkbox in  HTML -->
                     <input type="checkbox" id="useDefaultTitle"> Use Default Title <br>
 
+                    <!-- Color picker for background color -->
+                    <label for="backgroundColorPicker">Background Color:</label>
+                    <input type="color" id="backgroundColorPicker" value="#ffffff"> 
+
                     <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 
                     onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addBtn').click(); return false;}"
                     ></textarea>
 
                 </div>
-                <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
-                <button class="btn btn-primary" id="editBtn" style="margin-top: 7px;">DONE</button>
+                
+                <button class="btn-grad" id="addBtn" style="margin-top: 7px; padding-left: 65px; padding-right: 65px;">Add Note</button>
+                <button class="btn-grad" id="editBtn" style="margin-top: 7px;padding-left: 65px; padding-right: 65px;">DONE</button>
             </div>
         </div>
         <h3 style="color: rgb(134, 153, 237); margin:1rem 0;">Your Notes</h3>
         <div id="notes" class="row container-fluid" style="gap: 1rem;"> </div>
     </div>
+
     <submit id="btn"><a style="text-decoration:none" href="faq.html">FAQ'S</a></submit><!---adding faq section in  form of buttton-->
+
+    </div>
+
 </div>
 
 
 <!-- *** Toast Message *** -->
-  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px;color: var(--font-color);  ">
+  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:90vh; right:18px;color: var(--font-color);">
       <img src="images/check-mark.png" class="rounded mr-2" width="23px">
       <span>Note Created Successfully!</span>
   </div>

@@ -29,29 +29,43 @@ function showNotes(searchTerm = "") {
   }
 
   let filteredNotes = notesArray.filter(function (element) {
-    let cardTitle = element[0].toLowerCase();
-    let cardTxt = element[1].toLowerCase();
+    let cardTitle = element.title.toLowerCase();
+    let cardTxt = element.text.toLowerCase();
 
     return cardTitle.includes(searchTerm) || cardTxt.includes(searchTerm);
   });
-  console.log(filteredNotes);
-  console.log(searchTerm);
+
   let html = "";
-  filteredNotes.forEach(function (element, index) {
-    html += `
-      <div class="noteCard my-2 card" style="width: 18rem;">
-        <div class="card-body">
-        <div style="display:flex; justify-content:space-between;" >
-          <h5 class="card-title">${element[0]}</h5>
-          <div style="position:relative; left:0; cursor:pointer">
-            <i id="${index}" onclick="editNote(this.id)" class="fas fa-edit btn btn-primary"></i>
-            <i id="${index}" onclick="deleteNote(this.id)" class="fas fa-trash-alt btn btn-danger"></i>
-          </div>
-        </div>
-          <p class="card-text"> ${element[1]}</p>
-        </div>
-      </div>`;
+  let groupedNotes = {};
+
+  filteredNotes.forEach(function (element) {
+    const label = element.label || "Uncategorized";
+    if (!groupedNotes[label]) {
+      groupedNotes[label] = [];
+    }
+    groupedNotes[label].push(element);
   });
+
+  for (const label in groupedNotes) {
+    html += `<h3>${label}</h3>`;
+    groupedNotes[label].forEach(function (element, index) {
+      let fontColor = isLightColor(element.color || '#ffffff') ? 'black' : 'white';
+      html += `
+        <div class="noteCard my-2 card" style="width: 18rem; background-color: ${element.color || '#ffffff'}; color: ${fontColor};">
+          <div class="card-body">
+            <div style="display:flex; justify-content:space-between;" >
+              <h5 class="card-title">${element.title}</h5>
+              <div style="position:relative; left:0; cursor:pointer">
+              
+                <i id="${index}" onclick="editNote(this.id)" class="fas fa-edit btn btn-primary"></i>
+                <i id="${index}" onclick="deleteNote(this.id)" class="fas fa-trash-alt btn btn-danger"></i>
+              </div>
+            </div>
+            <p class="card-text">${element.text}</p>
+          </div>
+        </div>`;
+    });
+  }
 
   let notesElm = document.getElementById("notes");
   if (filteredNotes.length !== 0) {
@@ -72,49 +86,63 @@ function addaNote() {
   } else {
     notesArray = JSON.parse(notes);
   }
-  let useDefaultTitle = document.getElementById("useDefaultTitle").checked;
-  if (addtext.value !== "") {
-    if (heading.value === "" && useDefaultTitle) {
-      let title = getDefaultTitle(addtext.value);
-      notesArray.push([title, addtext.value]);
-      localStorage.setItem("notes", JSON.stringify(notesArray));
-      addtext.value = "";
-      heading.value = "";
-      $(".toast").toast("show");
-      if (volumeButton.classList.contains('fa-volume-up')) {
-        audio.play();
-      }
-    }
-    else if (heading.value === "" && !useDefaultTitle) {
-      styledTitle.innerHTML =
-        '<div class="alert alert-warning" role="alert" style="background: #b5f2fb;">Title cannot be empty! Please enter a title or check the below box for default title</div>';
-      setTimeout(() => {
-        styledTitle.innerHTML = "";
-      }
-        , 4000);
-    }
-    else {
-      let title = heading.value;
-      notesArray.push([title, addtext.value]);
-      localStorage.setItem("notes", JSON.stringify(notesArray));
-      addtext.value = "";
-      heading.value = "";
-      $(".toast").toast("show");
-      if (volumeButton.classList.contains('fa-volume-up')) {
-        audio.play();
-      }
-    }
 
+  const selectedColor = document.getElementById("backgroundColorPicker").value;
+
+  let useDefaultTitle = document.getElementById("useDefaultTitle").checked;
+  let label = document.getElementById("labelInput").value.trim() || null;
+
+  if (addtext.value !== "") {
+    if (useDefaultTitle) {
+      let title = getDefaultTitle(addtext.value);
+      notesArray.push({ label: label, title: title, text: addtext.value, color: selectedColor });
+      localStorage.setItem("notes", JSON.stringify(notesArray));
+      addtext.value = "";
+      heading.value = "";
+      $(".toast").toast("show");
+      if (volumeButton.classList.contains('fa-volume-up')) {
+        audio.play();
+      }
+    } else {
+      if (heading.value === "") {
+        styledTitle.innerHTML =
+          '<div class="alert alert-warning" role="alert" style="background: #b5f2fb;">Title cannot be empty! Please enter a title or check the below box for default title</div>';
+        setTimeout(() => {
+          styledTitle.innerHTML = "";
+        }, 4000);
+      } else {
+        let title = heading.value;
+        notesArray.push({ label: label, title: title, text: addtext.value, color: selectedColor });
+        localStorage.setItem("notes", JSON.stringify(notesArray));
+        addtext.value = "";
+        heading.value = "";
+        $(".toast").toast("show");
+        if (volumeButton.classList.contains('fa-volume-up')) {
+          audio.play();
+        }
+      }
+    }
   } else {
     styledMessageContainer.innerHTML =
       '<div class="alert alert-warning" role="alert">Notes cannot be empty!</div>';
     setTimeout(() => {
       styledMessageContainer.innerHTML = "";
-    }
-      , 2000);
-
+    }, 2000);
   }
   showNotes();
+}
+
+//Function to determine if the background color is light or dark
+
+function isLightColor(hexColor) {
+
+  let r = parseInt(hexColor.slice(1, 3), 16);
+  let g = parseInt(hexColor.slice(3, 5), 16);
+  let b = parseInt(hexColor.slice(5, 7), 16);
+
+  let luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+  return luminance > 0.5;
 }
 
 // Function to get default title from the first two words of text
@@ -132,13 +160,12 @@ function editNote(index) {
   } else {
     notesObj = JSON.parse(notes);
   }
-
-  heading.value = notesObj[index][0].replace(/ \(Edited\) .*/, '');
-  addtext.value = notesObj[index][1];
+  heading.value = notesObj[index].title.replace(/ \(Edited\) .*/, '');
+  addtext.value = notesObj[index].text;
 
   done.onclick = () => {
-    const updatedHeading = heading.value.trim(); // Trim leading and trailing spaces
-    const updatedAddText = addtext.value.trim(); // Trim leading and trailing spaces
+    const updatedHeading = heading.value.trim();
+    const updatedAddText = addtext.value.trim();
 
     if (!updatedAddText) {
       window.alert("Note cannot be empty. Your item will be deleted.");
@@ -158,23 +185,21 @@ function editNote(index) {
       // Check if heading is not empty before appending "(Edited) " + " " + n
       if (headingString) {
         headingString += " (Edited) " + new Date().toLocaleTimeString();
-        const update = [headingString, updatedAddText];
-
-      notesObj.splice(index, 1, update);
-      localStorage.setItem("notes", JSON.stringify(notesObj));
-      showNotes();
-      heading.value = "";
-      addtext.value = "";
-      addbtn.style.visibility = "visible";
-      done.style.visibility = "hidden";
-      } 
-      else {
-        // Heading is empty, show an alert message
+        notesObj[index].title = headingString;
+        notesObj[index].text = updatedAddText;
+        localStorage.setItem("notes", JSON.stringify(notesObj));
+        showNotes();
+        heading.value = "";
+        addtext.value = "";
+        addbtn.style.visibility = "visible";
+        done.style.visibility = "hidden";
+      } else {
         window.alert("Heading cannot be empty.");
       }
     }
   };
 }
+
 
 
 
