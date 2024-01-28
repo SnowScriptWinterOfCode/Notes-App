@@ -102,6 +102,7 @@
             </form>
         </div>
     </nav>
+    
     <!-- navbar -->
     <div class="center-image">
         <div class="image-container">
@@ -129,6 +130,10 @@
 
                     <!-- Adding checkbox in  HTML -->
                     <input type="checkbox" id="useDefaultTitle"> Use Default Title <br>
+
+                    <!-- Color picker for background color -->
+                    <label for="backgroundColorPicker">Background Color:</label>
+                    <input type="color" id="backgroundColorPicker" value="#ffffff"> 
 
                     <textarea class="form-control" id="addTxt" rows="3" placeholder="Note" 
                     onkeydown="if(event.keyCode==13 && !event.ctrlKey && !event.shiftKey){document.getElementById('addBtn').click(); return false;}"
