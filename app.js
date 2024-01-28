@@ -49,8 +49,9 @@ function showNotes(searchTerm = "") {
   for (const label in groupedNotes) {
     html += `<h3>${label}</h3>`;
     groupedNotes[label].forEach(function (element, index) {
+      let fontColor = isLightColor(element.color || '#ffffff') ? 'black' : 'white';
       html += `
-        <div class="noteCard my-2 card" style="width: 18rem;">
+        <div class="noteCard my-2 card" style="width: 18rem; background-color: ${element.color || '#ffffff'}; color: ${fontColor};">
           <div class="card-body">
             <div style="display:flex; justify-content:space-between;" >
               <h5 class="card-title">${element.title}</h5>
@@ -85,13 +86,16 @@ function addaNote() {
   } else {
     notesArray = JSON.parse(notes);
   }
+
+  const selectedColor = document.getElementById("backgroundColorPicker").value;
+
   let useDefaultTitle = document.getElementById("useDefaultTitle").checked;
   let label = document.getElementById("labelInput").value.trim() || null;
 
   if (addtext.value !== "") {
     if (useDefaultTitle) {
       let title = getDefaultTitle(addtext.value);
-      notesArray.push({ label: label, title: title, text: addtext.value });
+      notesArray.push({ label: label, title: title, text: addtext.value, color: selectedColor });
       localStorage.setItem("notes", JSON.stringify(notesArray));
       addtext.value = "";
       heading.value = "";
@@ -108,7 +112,7 @@ function addaNote() {
         }, 4000);
       } else {
         let title = heading.value;
-        notesArray.push({ label: label, title: title, text: addtext.value });
+        notesArray.push({ label: label, title: title, text: addtext.value, color: selectedColor });
         localStorage.setItem("notes", JSON.stringify(notesArray));
         addtext.value = "";
         heading.value = "";
@@ -128,6 +132,19 @@ function addaNote() {
   showNotes();
 }
 
+//Function to determine if the background color is light or dark
+
+function isLightColor(hexColor) {
+
+  let r = parseInt(hexColor.slice(1, 3), 16);
+  let g = parseInt(hexColor.slice(3, 5), 16);
+  let b = parseInt(hexColor.slice(5, 7), 16);
+
+  let luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+  return luminance > 0.5;
+}
+
 // Function to get default title from the first two words of text
 function getDefaultTitle(text) {
   let words = text.split(" ");
@@ -144,12 +161,12 @@ function editNote(index) {
     notesObj = JSON.parse(notes);
   }
 
-  heading.value = notesObj[index][0].replace(/ \(Edited\) .*/, '');
-  addtext.value = notesObj[index][1];
+  heading.value = notesObj[index].title.replace(/ \(Edited\) .*/, '');
+  addtext.value = notesObj[index].text;
 
   done.onclick = () => {
-    const updatedHeading = heading.value.trim(); // Trim leading and trailing spaces
-    const updatedAddText = addtext.value.trim(); // Trim leading and trailing spaces
+    const updatedHeading = heading.value.trim();
+    const updatedAddText = addtext.value.trim();
 
     if (!updatedAddText) {
       window.alert("Note cannot be empty. Your item will be deleted.");
@@ -169,23 +186,21 @@ function editNote(index) {
       // Check if heading is not empty before appending "(Edited) " + " " + n
       if (headingString) {
         headingString += " (Edited) " + new Date().toLocaleTimeString();
-        const update = [headingString, updatedAddText];
-
-      notesObj.splice(index, 1, update);
-      localStorage.setItem("notes", JSON.stringify(notesObj));
-      showNotes();
-      heading.value = "";
-      addtext.value = "";
-      addbtn.style.visibility = "visible";
-      done.style.visibility = "hidden";
-      } 
-      else {
-        // Heading is empty, show an alert message
+        notesObj[index].title = headingString;
+        notesObj[index].text = updatedAddText;
+        localStorage.setItem("notes", JSON.stringify(notesObj));
+        showNotes();
+        heading.value = "";
+        addtext.value = "";
+        addbtn.style.visibility = "visible";
+        done.style.visibility = "hidden";
+      } else {
         window.alert("Heading cannot be empty.");
       }
     }
   };
 }
+
 
 
 
