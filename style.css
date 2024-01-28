@@ -108,6 +108,74 @@ body {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+
+.blue-mute {
+  color: #637cf3;
+  font-size: 40px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.scroll-up-btn {
+    position: fixed;
+    height: 45px;
+    width: 42px;
+    background: #2980b9;
+    right: 30px;
+    bottom: 10px;
+    text-align: center;
+    line-height: 45px;
+    color: #fff;
+    z-index: 9999;
+    font-size: 30px;
+    border-radius: 6px;
+    border-bottom-width: 2px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+  .scroll-up-btn.show {
+    bottom: 30px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .scroll-up-btn:hover {
+    filter: brightness(90%);
+  }
+  .noteCard {
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+  }
+  .noteCard:hover {
+    transform: translateY(-5%); 
+    box-shadow: 0 0 10px 0 rgb(166, 166, 166);
+  }
+
+  .blue-mute {
+    color: #637cf3;
+    font-size: 40px;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  #btn{
+    margin-left:45rem;
+    padding:8px;
+    background-color: #d8d7e5;
+    font-weight: bolder;
+    border-radius:5px;
+    border:2px solid rgb(25, 24, 24);
+    width:56px;
+    cursor:pointer;
+    box-shadow:2px 2px #637cf3;
+    
+  }
+ a{
+  color: white;
+ }
+
+  
+
+
 .noteCard:hover {
   transform: translateY(-30px);
 }
+
